@@ -24,18 +24,21 @@ class View(ft.UserControl):
         self._title = ft.Text("TdP Baseball Manager 2026", color="blue", size=24)
         # self._page.controls.append(self._title)
 
-        self._ddAnno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left)
+        self._ddAnno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left, on_change=self._controller.handleAnno)
+        anni = self._controller.anni
+        for a in anni:
+            self._ddAnno.options.append(ft.dropdown.Option(a))
 
         row1 = ft.Row([ft.Container(self._title, width=500),
                        ft.Container(None, width=0),
                        ft.Container(self._ddAnno, width=250)], alignment=ft.MainAxisAlignment.CENTER)
         self._txtOutSquadre = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
         cont = ft.Container(self._txtOutSquadre, width=300, height= 200, alignment=ft.alignment.top_left, bgcolor="#deeded")
-        self._btnCreaGrafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo)
+        self._btnCreaGrafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo, disabled=True)
         row2 = ft.Row([cont, self._btnCreaGrafo], alignment=ft.MainAxisAlignment.CENTER, vertical_alignment=ft.CrossAxisAlignment.END)
 
         self._ddSquadra = ft.Dropdown(label="Squadra")
-        self._btnDettagli = ft.ElevatedButton(text="Dettagli", on_click=self._controller.handleDettagli)
+        self._btnDettagli = ft.ElevatedButton(text="Dettagli", on_click=self._controller.handleDettagli, disabled=True)
         self._btnPercorso = ft.ElevatedButton(text="Percorso", on_click=self._controller.handlePercorso)
         row3 = ft.Row([ft.Container(self._ddSquadra, width=250),
                        ft.Container(self._btnDettagli, width=250),
